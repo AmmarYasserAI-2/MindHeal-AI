@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify, send_from_directory
 import requests
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__, static_folder='', static_url_path='')
 
-API_KEY = "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"
+API_KEY = os.getenv("OPENROUTER_API_KEY")
+
 
 @app.route('/')
 def serve_index():
