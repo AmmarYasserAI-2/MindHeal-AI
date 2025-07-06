@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindHeal - Your Mental Wellness Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 🔝 NAVBAR -->
+    <header class="navbar">
+        <a href="#" class="logo">MindHeal ✨</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#chatbot">AI Chatbot</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 🌟 HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="glowing">Welcome to <span>MindHeal</span></h1>
+            <p class="floating">Your AI-powered sanctuary for mental wellness and emotional balance.</p>
+            <a href="#chatbot" class="btn">Start Your Journey</a>
+        </div>
+    </section>
+
+    <!-- 🎯 FEATURES -->
+    <section id="features" class="features">
+        <h2>Empowering Your Mental Wellness 🧘</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>📝 Smart Journaling</h3>
+                <p>Express your thoughts freely with AI-guided journaling that helps identify patterns and growth opportunities.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📊 Mood Analytics</h3>
+                <p>Track your emotional journey with interactive charts and receive personalized insights for better self-awareness.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎧 Mindful Moments</h3>
+                <p>Immerse yourself in curated soundscapes and guided meditations for instant calm and clarity.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🤝 24/7 Support</h3>
+                <p>Never feel alone with our AI companion ready to listen and support you anytime, anywhere.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🤖 CHATBOT -->
+    <section id="chatbot" class="chatbot">
+        <h2>Meet <span class="accent">Healia</span> 👩‍⚕️</h2>
+        <p>
+            Your compassionate AI therapist, available 24/7 to listen, understand, and guide you through life's challenges.
+            Whether you're feeling overwhelmed, anxious, or just need someone to talk to – Healia is here for you.
+        </p>
+        <div class="chatbot-placeholder">
+            <a href="/chat.html" class="btn">Chat with Healia</a>
+        </div>
+    </section>
+
+    <!-- 📱 FOOTER -->
+    <footer id="contact">
+        <div class="footer-content">
+            <p>Created with 💖 by <strong>Team MindHeal</strong></p>
+            <p>Transforming mental wellness through technology</p>
+            <p>📧 Need help? <a href="mailto:support@mindheal.ai">support@mindheal.ai</a></p>
+            <p>© 2025 MindHeal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

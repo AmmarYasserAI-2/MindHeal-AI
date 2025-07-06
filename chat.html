@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healia – Your AI Therapist 💖</title>
+    <!-- Add Noto Sans Arabic font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="chat.css">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>Healia 👩‍⚕️</h1>
+            <div class="therapist-status">
+                <span class="status-dot"></span>
+                Online & Ready to Help
+            </div>
+        </header>
+
+        <div id="chat-box" class="supports-arabic">
+            <!-- Messages will appear here -->
+        </div>
+
+        <div class="input-container">
+            <input 
+                type="text" 
+                id="user-input" 
+                placeholder="Type your message here..." 
+                aria-label="Type your message"
+                autocomplete="off"
+                class="supports-arabic"
+            >
+            <button id="send-btn" onclick="sendMessage()">Send Message</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Add event listener for Enter key
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Detect text direction
+        function detectTextDirection(text) {
+            const arabic = /[\u0600-\u06FF]/;
+            return arabic.test(text) ? 'rtl' : 'ltr';
+        }
+
+        async function sendMessage() {
+            const msg = userInput.value.trim();
+            if (!msg) return;
+
+            // Create and append user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = msg;
+            userDiv.dir = detectTextDirection(msg); // Set text direction
+            chatBox.appendChild(userDiv);
+
+            // Clear input
+            userInput.value = '';
+
+            try {
+                const res = await fetch("/chat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ message: msg })
+                });
+
+                const data = await res.json();
+
+                // Create and append bot message with markdown support
+                const botDiv = document.createElement('div');
+                botDiv.className = 'message bot';
+                botDiv.innerHTML = marked.parse(data.reply);
+                botDiv.dir = detectTextDirection(data.reply); // Set text direction
+                chatBox.appendChild(botDiv);
+
+                // Scroll to bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'message bot';
+                errorDiv.textContent = 'Sorry, I encountered an error. Please try again.';
+                chatBox.appendChild(errorDiv);
+            }
+        }
+
+        // Initial focus on input
+        userInput.focus();
+
+        // Add input event listener to handle text direction
+        userInput.addEventListener('input', function() {
+            this.dir = detectTextDirection(this.value);
+        });
+    </script>
+</body>
+</html>
