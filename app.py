@@ -10,11 +10,11 @@ API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 @app.route('/')
 def serve_index():
-    return send_from_directory('', 'index.html')  # ✅ this serves your landing page
+    return send_from_directory('', 'index.html')  # this serves landing page
 
 @app.route('/chat.html')
 def serve_chat():
-    return send_from_directory('', 'chat.html')  # ✅ this serves the chatbot
+    return send_from_directory('', 'chat.html')  #  this serves the chatbot
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.get_json()
